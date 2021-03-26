@@ -18,18 +18,18 @@
                 <div class="col-6">
                     <div class="mb-3">
                         <label for="userEmail" class="form-label">Adresse email</label>
-                        <input type="email" class="form-control" id="userEmail" aria-describedby="emailHelp">
+                        <input type="email" class="form-control" name="userEmail" id="userEmail" aria-describedby="emailHelp">
                         <div id="emailHelp" class="form-text">Votre adresse email ne sera jamais donnée à quelqu'un
                             d'autre.
                         </div>
                     </div>
                     <div class="mb-3">
                         <label for="userName" class="form-label">Prénom</label>
-                        <input type="text" class="form-control" id="userName">
+                        <input type="text" class="form-control" name="userName" id="userName">
                     </div>
                     <div class="mb-3">
                         <label for="userTweeter" class="form-label">Twitter</label>
-                        <input type="text" class="form-control" id="userTweeter">
+                        <input type="text" class="form-control" name="userTweeter" id="userTweeter">
                     </div>
                     <div class="mb-3">
                         <label for="userCountry" class="form-label">Pays</label>
@@ -80,9 +80,10 @@
         var xhr = new XMLHttpRequest();
         xhr.open(form.method, form.action, true);
         xhr.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+        xhr.onreadystatechange = () => {
+            document.location.href = "/home.html?name=" + encodeURIComponent(formData.userName) + "&country=" + encodeURIComponent(formData.userCountry);
+        };
         xhr.send(JSON.stringify(formData));
-
-        document.location.href = "/home.html?name=" + encodeURIComponent(formData.userName) + "&country=" + encodeURIComponent(formData.userCountry);
     }
 
     document.getElementById('inscription').onsubmit = function() {
